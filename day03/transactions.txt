@@ -1,0 +1,6 @@
+Abebe,150.00
+Chala,250.50
+Abebe,50.25
+Aster,500.00
+Chalas,100.00
+Aster,75.00
