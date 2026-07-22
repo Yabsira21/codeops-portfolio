@@ -53,7 +53,7 @@ class AccountFactory():
         raise ValueError(f"Unknown type: {kind}")
         
 class SavingAccount(Account):
-    def __init__(self, owner, number, rate, balance=0):
+    def __init__(self, owner, number, balance=0, rate=0.05):
         super().__init__(owner, number, balance)
         self.rate = rate
     
