@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Habesha Eatery</title>
+
+    <!-- <link rel="stylesheet" href="styles.css" /> -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="mock.css" />
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <h2>Habesha Eatery</h2>
+      </div>
+
+      <nav>
+        <a href="#">Home</a>
+        <a href="#menu">Menu</a>
+        <a href="#about">About</a>
+        <a href="#reservation">Reservation</a>
+        <a href="#location">Location</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-text">
+          <h1>A Taste of Ethiopia</h1>
+
+          <p>
+            Experience traditional Ethiopian cuisine made with fresh ingredients
+            and authentic recipes.
+          </p>
+        </div>
+
+        <div class="hero-image">
+          <img src="../practice/injera.jpg" alt="Food" />
+        </div>
+      </section>
+
+      <section id="menu">
+        <div class="menu-title">
+          <h2>Our Menu</h2>
+
+          <p>Traditional Ethiopian dishes prepared with fresh ingredients.</p>
+        </div>
+
+        <div class="menu-grid">
+          <article class="menu-card">
+            <h3>Doro Wat</h3>
+
+            <p class="description">
+              Ethiopia's famous spicy chicken stew served with freshly baked
+              injera.
+            </p>
+
+            <table>
+              <thead>
+                <tr>
+                  <th>Ingredient</th>
+                  <th>Amount</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td>Chicken</td>
+                  <td>250 g</td>
+                </tr>
+
+                <tr>
+                  <td>Berbere</td>
+                  <td>15 g</td>
+                </tr>
+
+                <tr>
+                  <td>Garlic</td>
+                  <td>3 cloves</td>
+                </tr>
+
+                <tr>
+                  <td>Onion</td>
+                  <td>1 large</td>
+                </tr>
+
+                <tr>
+                  <td>Egg</td>
+                  <td>1 pc</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <p class="price">320</p>
+          </article>
+
+          <article class="menu-card">
+            <h3>Kitfo</h3>
+
+            <p class="description">
+              Fresh minced beef seasoned with mitmita and Ethiopian butter.
+            </p>
+
+            <table>
+              <thead>
+                <tr>
+                  <th>Ingredient</th>
+                  <th>Amount</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td>Beef</td>
+                  <td>300 g</td>
+                </tr>
+
+                <tr>
+                  <td>Mitmita</td>
+                  <td>12 g</td>
+                </tr>
+
+                <tr>
+                  <td>Butter</td>
+                  <td>20 g</td>
+                </tr>
+
+                <tr>
+                  <td>Ayib Cheese</td>
+                  <td>50 g</td>
+                </tr>
+
+                <tr>
+                  <td>Injera</td>
+                  <td>1 pc</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <p class="price">420</p>
+          </article>
+
+          <article class="menu-card">
+            <h3>Tibs</h3>
+
+            <p class="description">
+              Tender beef cubes sautéed with onions, peppers and rosemary.
+            </p>
+
+            <table>
+              <thead>
+                <tr>
+                  <th>Ingredient</th>
+                  <th>Amount</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td>Beef</td>
+                  <td>250 g</td>
+                </tr>
+
+                <tr>
+                  <td>Onion</td>
+                  <td>1 pc</td>
+                </tr>
+
+                <tr>
+                  <td>Tomato</td>
+                  <td>2 pcs</td>
+                </tr>
+
+                <tr>
+                  <td>Pepper</td>
+                  <td>2 pcs</td>
+                </tr>
+
+                <tr>
+                  <td>Rosemary</td>
+                  <td>5 g</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <p class="price">300</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="reservation">
+        <form>
+          <h2>Reserve a Table</h2>
+
+          <input type="text" placeholder="Full Name" />
+
+          <input type="tel" placeholder="Phone" />
+
+          <input type="date" />
+
+          <input type="time" />
+
+          <input type="number" placeholder="Guests" />
+
+          <textarea placeholder="Message"></textarea>
+
+          <button>Reserve Now</button>
+        </form>
+      </section>
+
+      <section id="about">
+        <div>
+          <h2>About Us</h2>
+
+          <p>
+            We bring authentic Ethiopian cuisine to your table using fresh local
+            ingredients and traditional family recipes.
+          </p>
+
+          <ul>
+            <li>Traditional Recipes</li>
+            <li>Fresh Ingredients</li>
+            <li>Family Friendly</li>
+          </ul>
+        </div>
+
+        <img src="../practice/buna.jpg" alt="About" />
+      </section>
+
+      <section id="location">
+        <h2>Find Us</h2>
+
+        <iframe
+          src="https://www.google.com/maps?q=Addis%20Ababa%20Ethiopia&output=embed"
+          loading="lazy"
+        >
+        </iframe>
+      </section>
+    </main>
+
+    <footer>
+      <h3>Habesha Eatery</h3>
+
+      <p>Fresh Ethiopian Cuisine • Addis Ababa</p>
+
+      <p>© 2026 Habesha Eatery</p>
+    </footer>
+  </body>
+</html>

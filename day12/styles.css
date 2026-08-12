@@ -9,27 +9,20 @@ a {
   margin: 1rem;
 }
 
+body {
+  /* font-family: "Times New Roman"; */
+  font-family: "Courier New", Courier, monospace;
+}
+
 header {
   /* background-color: red; */
   display: flex;
   align-items: center;
-  /* margin: auto 2rem; */
-  /* justify-content: center; */
 }
 
 header {
   background-color: gold;
   /* margin-bottom: 1rem; */
-}
-
-/* main {
-  max-width: 108rem;
-  margin: 2rem auto;
- 
-} */
-
-section {
-  /* margin: 1rem 0; */
 }
 
 form > * {
@@ -49,14 +42,6 @@ table {
   /* width: 100%; */
 }
 
-/* #hero {
-  background-image: url("assets/store.jpg");
-  background-repeat: no-repeat;
-
-  background-size: contain;
-  background-position: 0% 50%;
-} */
-
 #picture {
   position: absolute;
   height: 100%;
@@ -70,14 +55,6 @@ table {
   height: 80vh;
 }
 
-/* #hero > * {
-  color: white;
-}
-
-#hero a {
-  color: white;
-} */
-
 #about,
 #shop,
 #products {
@@ -86,18 +63,6 @@ table {
   align-items: center;
   justify-content: center;
 }
-
-/* #products {
-  background-color: blue;
-}
-
-#about {
-  background-color: green;
-}
-
-#shop {
-  background-color: yellow;
-} */
 
 #contact {
   height: 20vh;
