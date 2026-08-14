@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Cart App</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 500px;
+            margin: 40px auto;
+        }
+
+        li {
+            margin: 10px 0;
+            padding: 10px;
+            background: #f1f1f1;
+            cursor: pointer;
+        }
+
+        li:hover {
+            background: #ddd;
+        }
+
+        button {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>My Cart</h1>
+
+    <form id="add-form">
+        <input id="name_value" placeholder="Enter item">
+        <button type="submit" id="submit">Add</button>
+    </form>
+
+    <ul id="list">
+    </ul>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
