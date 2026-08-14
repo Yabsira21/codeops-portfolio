@@ -1,63 +1,95 @@
-let cart = [
-  { id: 1, name: "Teff", qty: 2 },
-  { id: 2, name: "Berbere", qty: 1 },
+let items = [
+  { id: 1, name: "Teff", done: false },
+  { id: 2, name: "Berbere", done: false },
 ];
 
 const list = document.querySelector("#list");
-const myform = document.querySelector("#add-form");
-const name_input = document.querySelector("#name_value");
+const myform = document.querySelector("#form");
+const name_input = document.querySelector("#input");
+const count = document.querySelector("#count");
 
 function render() {
   list.replaceChildren();
 
-  cart.forEach(function (item) {
+  items.forEach(function (item) {
     const li = document.createElement("li");
-    li.textContent = `${item.name} + ${item.qty}`;
+
+    li.textContent = item.name;
     li.dataset.id = item.id;
+
+    if (item.done) {
+      li.classList.add("done");
+    }
+
+    const button = document.createElement("button");
+
+    button.textContent = "Remove";
+    button.dataset.action = "remove";
+
+    li.append(button);
     list.append(li);
   });
+
+  const remaining = items.filter(function (item) {
+    return !item.done;
+  }).length;
+
+  count.textContent = `${remaining} items remaining`;
 }
 
 render();
 
 myform.addEventListener("submit", function (e) {
   e.preventDefault();
+
   const itemText = name_input.value.trim();
+
   if (!itemText) return;
-  const existingItem = cart.find(function (item) {
+
+  const alreadyExists = items.some(function (item) {
     return item.name.toLowerCase() === itemText.toLowerCase();
   });
 
-  if (existingItem) {
-    existingItem.qty += 1;
-  } else {
-    cart.push({
-      name: itemText,
-      id: Date.now(),
-      qty: 1,
-    });
+  if (alreadyExists) {
+    alert("This item is already on your list.");
+    return;
   }
+
+  items.push({
+    id: Date.now(),
+    name: itemText,
+    done: false,
+  });
 
   render();
   myform.reset();
 });
 
 list.addEventListener("click", function (e) {
-  if (e.target.tagName === "LI") {
-    const clickedId = Number(e.target.dataset.id);
-    const index = cart.findIndex(function (item) {
-      return item.id === clickedId;
+  const li = e.target.closest("li");
+
+  if (!li) return;
+
+  const clickedId = Number(li.dataset.id);
+
+  // Remove item
+  if (e.target.dataset.action === "remove") {
+    items = items.filter(function (item) {
+      return item.id !== clickedId;
     });
 
-    console.log(index);
-    if (cart[index] && index !== -1) {
-      cart[index].qty > 1 ? cart[index].qty-- : cart.splice(index, 1);
-    }
-
-    // if (index !== -1) {
-    //   cart.splice(index, 1);
-    // }
-
     render();
+    return;
   }
+
+  // Mark as bought / unbought
+  const item = items.find(function (item) {
+    return item.id === clickedId;
+  });
+
+  if (item) {
+    item.done = !item.done;
+  }
+
+  render();
 });
