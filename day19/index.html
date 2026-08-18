@@ -3,25 +3,53 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shopping List</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Cart App</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 500px;
+            margin: 40px auto;
+        }
+
+        li {
+            margin: 10px 0;
+            padding: 10px;
+            background: #f1f1f1;
+            cursor: pointer;
+        }
+
+        li:hover {
+            background: #ddd;
+        }
+
+        button {
+            margin-left: 10px;
+        }
+
+        .done {
+            text-decoration: line-through;
+
+        }
+    </style>
 </head>
 
 <body>
 
-    <h1>Shopping List</h1>
+    <h1>My Cart</h1>
 
-    <form id="form">
-        <input id="input" type="text" placeholder="Enter grocery item">
-        <button type="submit">Add</button>
+    <form id="add-form">
+        <input id="name" placeholder="Enter item">
+        <button type="submit" id="submit">Add</button>
     </form>
 
-    <p id="count">0 items remaining</p>
+    <p id="count">0 items</p>
 
-    <ul id="list"></ul>
+    <ul id="list">
+    </ul>
 
     <script src="script.js"></script>
+
 </body>
 
 </html>

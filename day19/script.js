@@ -1,95 +1,92 @@
-let items = [
-  { id: 1, name: "Teff", done: false },
-  { id: 2, name: "Berbere", done: false },
-];
+const items = [];
 
+const form = document.querySelector("#add-form");
+const input = document.querySelector("#name");
 const list = document.querySelector("#list");
-const myform = document.querySelector("#form");
-const name_input = document.querySelector("#input");
 const count = document.querySelector("#count");
 
 function render() {
-  list.replaceChildren();
+  list.innerHTML = "";
+
+  count.textContent = `${items.length} items`;
 
   items.forEach(function (item) {
     const li = document.createElement("li");
 
-    li.textContent = item.name;
+    // Give each row its ID
     li.dataset.id = item.id;
 
+    // Add done class if item is bought
     if (item.done) {
       li.classList.add("done");
     }
 
-    const button = document.createElement("button");
+    li.innerHTML = `
+            ${item.name}
+            <button class="buy">Bought</button>
+            <button class="remove">Remove</button>
+        `;
 
-    button.textContent = "Remove";
-    button.dataset.action = "remove";
-
-    li.append(button);
-    list.append(li);
+    list.appendChild(li);
   });
-
-  const remaining = items.filter(function (item) {
-    return !item.done;
-  }).length;
-
-  count.textContent = `${remaining} items remaining`;
 }
 
-render();
+// Add item
+form.addEventListener("submit", function (event) {
+  event.preventDefault();
 
-myform.addEventListener("submit", function (e) {
-  e.preventDefault();
+  const name = input.value.trim();
 
-  const itemText = name_input.value.trim();
-
-  if (!itemText) return;
-
-  const alreadyExists = items.some(function (item) {
-    return item.name.toLowerCase() === itemText.toLowerCase();
-  });
-
-  if (alreadyExists) {
-    alert("This item is already on your list.");
+  if (name === "") {
     return;
   }
 
   items.push({
     id: Date.now(),
-    name: itemText,
+    name: name,
     done: false,
   });
 
+  input.value = "";
+
+  // Rebuild the list
   render();
-  myform.reset();
 });
 
-list.addEventListener("click", function (e) {
-  const li = e.target.closest("li");
+// Handle clicks on the list
+list.addEventListener("click", function (event) {
+  const row = event.target.closest("li");
 
-  if (!li) return;
-
-  const clickedId = Number(li.dataset.id);
-
-  // Remove item
-  if (e.target.dataset.action === "remove") {
-    items = items.filter(function (item) {
-      return item.id !== clickedId;
-    });
-
-    render();
+  if (!row) {
     return;
   }
 
-  // Mark as bought / unbought
+  const id = Number(row.dataset.id);
+
   const item = items.find(function (item) {
-    return item.id === clickedId;
+    return item.id === id;
   });
 
-  if (item) {
-    item.done = !item.done;
+  if (!item) {
+    return;
   }
 
-  render();
+  if (event.target.classList.contains("buy")) {
+    item.done = !item.done;
+
+    render();
+  }
+
+  if (event.target.classList.contains("remove")) {
+    const index = items.findIndex(function (item) {
+      return item.id === id;
+    });
+
+    items.splice(index, 1);
+
+    render();
+  }
 });
+
+// Initial render
+render();
