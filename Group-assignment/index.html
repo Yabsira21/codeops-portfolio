@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body>
+
+    <div class="dashboard-container">
+        <!-- Sidebar / Topbar depending on viewport -->
+        <aside class="sidebar">
+            <div class="logo-container">
+                <div class="logo-icon"><i class="fa-solid fa-fire"></i></div>
+            </div>
+            <nav class="nav-menu">
+                <a href="#" class="nav-item">Categories</a>
+                <a href="#" class="nav-item"> Dishes</a>
+                <a href="#" class="nav-item">Orders</a>
+            </nav>
+
+        </aside>
+
+        <!-- Main Dashboard Area -->
+        <main class="main-content">
+            <!-- Search -->
+            <div class="search-container">
+                <input type="text" placeholder="Search Food, Cuisine or a Dish">
+                <div class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></div>
+            </div>
+
+            <!-- Categories -->
+            <section>
+                <div class="section-header">
+                    <div class="section-title">
+                        <h2>Categories</h2>
+                        <p><span>10+ New</span> Categories added this week</p>
+                    </div>
+                    <a href="#" class="view-more">View More <div class="view-more-btn"><i
+                                class="fa-solid fa-chevron-right"></i></div></a>
+                </div>
+                <div class="categories-list">
+                    <div class="category-item">🍔</div>
+                    <div class="category-item">🍕</div>
+                    <div class="category-item">🍟</div>
+                    <div class="category-item">🍲</div>
+                    <div class="category-item">🥪</div>
+                    <div class="category-item">🍦</div>
+                    <div class="category-item">🍰</div>
+                </div>
+            </section>
+
+            <!-- Popular Dishes -->
+            <section>
+                <div class="section-header">
+                    <div class="section-title">
+                        <h2>Popular Dishes</h2>
+                        <p><span>20+ New</span> dishes added this week</p>
+                    </div>
+                    <a href="#" class="view-more">View More <div class="view-more-btn"><i
+                                class="fa-solid fa-chevron-right"></i></div></a>
+                </div>
+                <div class="dishes-grid">
+                    <div class="dish-card">
+                        <div class="dish-img"><img src="Assets/doro.png" alt=""></div>
+                        <div class="dish-name">Doro Wot</div>
+                        <div class="dish-subtext">Starting From</div>
+                        <div class="dish-price">ETB 600.00</div>
+                        <div class="dish-meta">
+                            <div class="dish-rating"><i class="fa-solid fa-star"></i> 4.5</div>
+                            <!-- <div class="dish-sales">1360 <span>Total Sale</span></div> -->
+                        </div>
+                    </div>
+
+                    <div class="dish-card">
+                        <!-- <div class="dish-img">🍜</div> -->
+                        <div class="dish-img"><img src="Assets/gomen.png" alt=""></div>
+                        <div class="dish-name">Gomen</div>
+                        <div class="dish-subtext">Starting From</div>
+                        <div class="dish-price">ETB 300.00</div>
+                        <div class="dish-meta">
+                            <div class="dish-rating"><i class="fa-solid fa-star"></i> 4.8</div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Order Reports -->
+            <section>
+                <div class="section-header">
+                    <div class="section-title">
+                        <h2>Order Reports</h2>
+                        <p><span>Wow!! 100+ New</span> order got this week</p>
+                    </div>
+                    <a href="#" class="view-more">View More <div class="view-more-btn"><i
+                                class="fa-solid fa-chevron-right"></i></div></a>
+                </div>
+                <div class="table-wrapper">
+                    <table class="reports-table">
+                        <thead>
+                            <tr>
+                                <th>Customer</th>
+                                <th>Order number</th>
+                                <th>Address</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="customer-cell">
+                                        <div class="avatar"
+                                            style="background-image: url('https://i.pravatar.cc/100?img=12');"></div>
+                                        Jamsed Jhon
+                                    </div>
+                                </td>
+                                <td>01845723200573</td>
+                                <td>Korangi Teagha Hills</td>
+                                <td>$120.45</td>
+                                <td><span class="status-badge completed">Completed</span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="customer-cell">
+                                        <div class="avatar"
+                                            style="background-image: url('https://i.pravatar.cc/100?img=33');"></div>
+                                        Peter Parker
+                                    </div>
+                                </td>
+                                <td>01976854823047</td>
+                                <td>City Center, CA</td>
+                                <td>$140.45</td>
+                                <td><span class="status-badge pending">Pending</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+
+        <!-- Cart Side / Bottom Panel -->
+        <aside class="cart-panel">
+            <div>
+                <!-- Delivery Card -->
+                <div class="delivery-card">
+                    <div class="delivery-title">DELIVERY ADDRESS</div>
+                    <div class="delivery-address">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <span>Po. 1478, Street No. 52, West New York</span>
+                    </div>
+                    <div class="delivery-time">
+                        <i class="fa-regular fa-clock"></i>
+                        <span>20 min</span>
+                    </div>
+                </div>
+
+                <!-- Cart Header -->
+                <div class="cart-header">
+                    <div class="cart-title">
+                        <i class="fa-solid fa-cart-shopping"></i> Cart
+                    </div>
+                    <div class="order-id">Order ID: #1099</div>
+                </div>
+
+                <!-- Delivery Mode Selector -->
+                <div class="delivery-toggle">
+                    <div class="toggle-btn active">Delivery</div>
+                    <div class="toggle-btn">Dine In</div>
+                    <div class="toggle-btn">Takeaway</div>
+                </div>
+
+                <!-- Cart Items -->
+                <div class="cart-items">
+                    <div class="cart-item">
+                        <div class="cart-item-info">
+                            <div class="cart-item-icon">🍕</div>
+                            <div class="cart-item-details">
+                                <h4>Pepperoni Pizza</h4>
+                                <p>Thin Crust</p>
+                                <div class="cart-item-qty">
+                                    <div class="qty-btn"><i class="fa-solid fa-minus"></i></div>
+                                    <span>2</span>
+                                    <div class="qty-btn"><i class="fa-solid fa-plus"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="edit-btn"><i class="fa-solid fa-pen"></i></div>
+                    </div>
+
+                    <div class="cart-item">
+                        <div class="cart-item-info">
+                            <div class="cart-item-icon">🍔</div>
+                            <div class="cart-item-details">
+                                <h4>Cheese Burger</h4>
+                                <p>Whole wheat bun</p>
+                                <div class="cart-item-qty">
+                                    <div class="qty-btn"><i class="fa-solid fa-minus"></i></div>
+                                    <span>2</span>
+                                    <div class="qty-btn"><i class="fa-solid fa-plus"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="edit-btn"><i class="fa-solid fa-pen"></i></div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+
+
+
+                <!-- Summary -->
+                <div class="summary-row">
+                    <span>Sub Total</span>
+                    <span>$155.20</span>
+                </div>
+                <div class="summary-row">
+                    <span>Delivery Charge</span>
+                    <span>$10</span>
+                </div>
+                <div class="summary-row total">
+                    <span>TOTAL</span>
+                    <span>$165.20</span>
+                </div>
+
+                <button class="checkout-btn">Confirm Order</button>
+            </div>
+        </aside>
+    </div>
+
+</body>
+
+</html>
