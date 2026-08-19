@@ -149,7 +149,8 @@ dishesGrid.addEventListener("click", function (e) {
   });
 
   if (existingItem) {
-    existingItem.qty++;
+    // existingItem.qty++;
+    return;
   } else {
     cart.push({
       food: food,
