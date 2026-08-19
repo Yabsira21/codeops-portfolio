@@ -378,6 +378,10 @@ checkoutForm.addEventListener("submit", function (e) {
   checkoutForm.reset();
 
   renderOrderList();
+
+  render();
+
+  //   renderDishes();
 });
 
 // // 1. food
