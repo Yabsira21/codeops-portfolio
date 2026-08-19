@@ -251,6 +251,10 @@ main::-webkit-scrollbar {
   align-items: center;
 }
 
+.dish-img img {
+  height: 120px;
+}
+
 .dish-name {
   color: #fff;
   font-size: 14px;
@@ -287,6 +291,19 @@ main::-webkit-scrollbar {
   gap: 3px;
   color: #fff;
   font-weight: 600;
+}
+
+.dish-add-to-cart button {
+  width: 100%;
+  background-color: #2d2d35;
+  color: #fff;
+  border: none;
+  padding: 6px 16px;
+  border-radius: 16px;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+  /* margin-top: 15px; */
 }
 
 .dish-rating i {
@@ -438,11 +455,6 @@ main::-webkit-scrollbar {
   color: #fff;
   font-size: 16px;
   font-weight: 600;
-}
-
-.order-id {
-  font-size: 10px;
-  color: #6c6c7a;
 }
 
 .delivery-toggle {
