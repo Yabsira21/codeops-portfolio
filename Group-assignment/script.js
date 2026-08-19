@@ -1,26 +1,3 @@
-// // 1. food
-// const food = {
-//   id: "1",
-//   category: "Main",
-//   price: 240, // ETB
-//   spicy: true,
-//   image: "doro.jpg",
-// };
-
-// // 2. cart
-// const cart = [{ food, qty: 1 }];
-
-// // 3. order
-// const order = {
-//   id: 1,
-//   foods: [{ food, qty: 2 }],
-//   customer: {
-//     name: "Yabsira",
-//     phone: "0912345678",
-//     address: "Bole, Addis Ababa",
-//   },
-// };
-
 let foods = [
   {
     id: "1",
@@ -64,69 +41,12 @@ let foods = [
   },
 ];
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
-// let cart = [];
+let orders = [];
+
 let cartContainer = document.querySelector(".cart-items");
-// for (let food of foods) {
-//   document.querySelector(".dishes-grid").innerHTML += `
-//   <div class="dish-card" data-id="${food.id}">
-//         <div class="dish-img"><img src="${food.image}" alt=""></div>
-//         <div class="dish-name">${food.name}</div>
-//         <div class="dish-subtext">Starting From</div>
-//         <div class="dish-price">ETB ${food.price.toFixed(2)}</div>
-//         <div class="dish-meta">
-//             <div class="dish-rating"><i class="fa-solid fa-star"></i> ${food.rating}</div>
-//             <div class="dish-add-to-cart"><button class="add-to-cart">Add to Cart</button></div>
-//         </div>
-//     </div>
-//   `;
-// }
-function renderDishes(foodList) {
-  const dishesGrid = document.querySelector(".dishes-grid");
+let tableContainer = document.querySelector("tbody");
 
-  dishesGrid.innerHTML = "";
-
-  for (let food of foodList) {
-    dishesGrid.innerHTML += `
-      <div class="dish-card" data-id="${food.id}">
-        <div class="dish-img">
-          <img src="${food.image}" alt="">
-        </div>
-
-        <div class="dish-name">${food.name}</div>
-
-        <div class="dish-subtext">Starting From</div>
-
-        <div class="dish-price">
-          ETB ${food.price.toFixed(2)}
-        </div>
-
-        <div class="dish-meta">
-          <div class="dish-rating">
-            <i class="fa-solid fa-star"></i> ${food.rating}
-          </div>
-
-          <div class="dish-add-to-cart">
-            <button class="add-to-cart">Add to Cart</button>
-          </div>
-        </div>
-      </div>
-    `;
-  }
-}
-
-renderDishes(foods);
-
-render();
-
-function calculateTotal(cart) {
-  let total = 0;
-
-  for (let item of cart) {
-    total += item.food.price * item.qty;
-  }
-
-  return total;
-}
+// document.querySelector('.table-wrapper').classList.add("")
 
 function render() {
   cartContainer.innerHTML = "";
@@ -182,6 +102,77 @@ function render() {
   }
   document.querySelector(".sub-total").textContent = `ETB ${subTotal}`;
   document.querySelector(".grand-total").textContent = `ETB ${subTotal + 10}`;
+}
+
+function renderDishes(foodList) {
+  const dishesGrid = document.querySelector(".dishes-grid");
+
+  dishesGrid.innerHTML = "";
+
+  for (let food of foodList) {
+    dishesGrid.innerHTML += `
+      <div class="dish-card" data-id="${food.id}">
+        <div class="dish-img">
+          <img src="${food.image}" alt="">
+        </div>
+
+        <div class="dish-name">${food.name}</div>
+
+        <div class="dish-subtext">Starting From</div>
+
+        <div class="dish-price">
+          ETB ${food.price.toFixed(2)}
+        </div>
+
+        <div class="dish-meta">
+          <div class="dish-rating">
+            <i class="fa-solid fa-star"></i> ${food.rating}
+          </div>
+
+          <div class="dish-add-to-cart">
+            <button class="add-to-cart">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+}
+
+function renderOrderList() {
+  tableContainer.innerHTML = "";
+  orders.forEach(function (i) {
+    const tr = document.createElement("tr");
+
+    tr.innerHTML = `
+            <td>
+                <div class="customer-cell">
+                    <div class="avatar"
+                        style="background-image: url('https://i.pravatar.cc/100?img=12');"></div>
+                    ${i.customer.name}
+                </div>
+            </td>
+            <td>${i.id}</td>
+            <td>${i.customer.address}</td>
+            <td>ETB ${i.total}</td>
+             <td><span class="status-badge pending">Pending</span></td>
+                          
+                            `;
+    tableContainer.appendChild(tr);
+  });
+}
+
+renderDishes(foods);
+
+render();
+
+function calculateTotal(cart) {
+  let total = 0;
+
+  for (let item of cart) {
+    total += item.food.price * item.qty;
+  }
+
+  return total;
 }
 
 const dishesGrid = document.querySelector(".dishes-grid");
@@ -323,3 +314,91 @@ categories.addEventListener("click", function (e) {
 
   renderDishes(filteredFoods);
 });
+
+const checkoutBtn = document.querySelector(".checkout-btn");
+const checkoutModal = document.querySelector("#checkout-modal");
+const closeModal = document.querySelector("#close-modal");
+
+checkoutBtn.addEventListener("click", function () {
+  if (cart.length === 0) {
+    alert("Your cart is empty.");
+    return;
+  }
+
+  checkoutModal.classList.add("active");
+});
+
+closeModal.addEventListener("click", function () {
+  checkoutModal.classList.remove("active");
+});
+
+const checkoutForm = document.querySelector("#checkout-form");
+
+checkoutForm.addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const name = document.querySelector("#customer-name").value.trim();
+  const phone = document.querySelector("#customer-phone").value.trim();
+  const address = document.querySelector("#customer-address").value.trim();
+
+  // Basic validation
+  if (name.length < 2) {
+    alert("Please enter a valid name.");
+    return;
+  }
+
+  const order = {
+    id: Date.now(),
+    foods: [...cart],
+    customer: {
+      name: name,
+      phone: phone,
+      address: address,
+    },
+    total: calculateTotal(cart) + 10,
+    // status: "Pending",
+  };
+
+  orders.push(order);
+
+  //   localStorage.setItem("orders", JSON.stringify(orders));
+
+  console.log("Order created:", order);
+  console.log("All orders:", orders);
+
+  // Clear cart
+  cart = [];
+  localStorage.setItem("cart", JSON.stringify(cart));
+
+  // Close modal
+  checkoutModal.classList.remove("active");
+
+  document.querySelector(".table-wrapper").classList.remove("hidden");
+
+  checkoutForm.reset();
+
+  renderOrderList();
+});
+
+// // 1. food
+// const food = {
+//   id: "1",
+//   category: "Main",
+//   price: 240, // ETB
+//   spicy: true,
+//   image: "doro.jpg",
+// };
+
+// // 2. cart
+// const cart = [{ food, qty: 1 }];
+
+// // 3. order
+// const order = {
+//   id: 1,
+//   foods: [{ food, qty: 2 }],
+//   customer: {
+//     name: "Yabsira",
+//     phone: "0912345678",
+//     address: "Bole, Addis Ababa",
+//   },
+// };

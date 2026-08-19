@@ -611,6 +611,91 @@ main::-webkit-scrollbar {
   margin-top: 15px;
 }
 
+.hidden {
+  display: none;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-overlay.active {
+  display: flex;
+}
+
+.checkout-modal {
+  width: 90%;
+  max-width: 420px;
+  background-color: #1e1e23;
+  border: 1px solid #2a2a32;
+  border-radius: 18px;
+  padding: 24px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.modal-header h2 {
+  color: #fff;
+  font-size: 20px;
+}
+
+.close-modal {
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 50%;
+  background-color: #2d2d35;
+  color: #aaa;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  display: block;
+  color: #fff;
+  font-size: 12px;
+  margin-bottom: 7px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px;
+  background-color: #26262c;
+  border: 1px solid #34343c;
+  border-radius: 10px;
+  color: #fff;
+  outline: none;
+  font-size: 12px;
+}
+
+.form-group input:focus {
+  border-color: #ff4a3d;
+}
+
+.error-message {
+  display: block;
+  color: #ff5e5e;
+  font-size: 10px;
+  margin-top: 5px;
+  min-height: 12px;
+}
+
 /* --------------------------------------------------
            BREAKPOINT 1: TABLET (min-width: 768px)
         -------------------------------------------------- */
