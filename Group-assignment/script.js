@@ -26,7 +26,7 @@ let foods = [
     id: "1",
     category: "Main",
     name: "Doro wot",
-    price: 600, // ETB
+    price: 800, // ETB
     spicy: true,
     fasting: false,
     image: "Assets/doro.png",
@@ -42,24 +42,79 @@ let foods = [
     image: "Assets/gomen.png",
     rating: 3.45,
   },
+  {
+    id: "3",
+    category: "Main",
+    name: "Kitfo",
+    price: 2000, // ETB
+    spicy: true,
+    fasting: false,
+    image: "Assets/kitfo.png",
+    rating: 4.45,
+  },
+  {
+    id: "4",
+    category: "Main",
+    name: "Kurte",
+    price: 1500, // ETB
+    spicy: true,
+    fasting: false,
+    image: "Assets/kuret.png",
+    rating: 4.85,
+  },
 ];
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 // let cart = [];
 let cartContainer = document.querySelector(".cart-items");
-for (let food of foods) {
-  document.querySelector(".dishes-grid").innerHTML += `
-  <div class="dish-card" data-id="${food.id}">
-        <div class="dish-img"><img src="${food.image}" alt=""></div>
-        <div class="dish-name">${food.name}</div>
-        <div class="dish-subtext">Starting From</div>
-        <div class="dish-price">ETB ${food.price.toFixed(2)}</div>
-        <div class="dish-meta">
-            <div class="dish-rating"><i class="fa-solid fa-star"></i> ${food.rating}</div>
-            <div class="dish-add-to-cart"><button class="add-to-cart">Add to Cart</button></div>
+// for (let food of foods) {
+//   document.querySelector(".dishes-grid").innerHTML += `
+//   <div class="dish-card" data-id="${food.id}">
+//         <div class="dish-img"><img src="${food.image}" alt=""></div>
+//         <div class="dish-name">${food.name}</div>
+//         <div class="dish-subtext">Starting From</div>
+//         <div class="dish-price">ETB ${food.price.toFixed(2)}</div>
+//         <div class="dish-meta">
+//             <div class="dish-rating"><i class="fa-solid fa-star"></i> ${food.rating}</div>
+//             <div class="dish-add-to-cart"><button class="add-to-cart">Add to Cart</button></div>
+//         </div>
+//     </div>
+//   `;
+// }
+function renderDishes(foodList) {
+  const dishesGrid = document.querySelector(".dishes-grid");
+
+  dishesGrid.innerHTML = "";
+
+  for (let food of foodList) {
+    dishesGrid.innerHTML += `
+      <div class="dish-card" data-id="${food.id}">
+        <div class="dish-img">
+          <img src="${food.image}" alt="">
         </div>
-    </div>
-  `;
+
+        <div class="dish-name">${food.name}</div>
+
+        <div class="dish-subtext">Starting From</div>
+
+        <div class="dish-price">
+          ETB ${food.price.toFixed(2)}
+        </div>
+
+        <div class="dish-meta">
+          <div class="dish-rating">
+            <i class="fa-solid fa-star"></i> ${food.rating}
+          </div>
+
+          <div class="dish-add-to-cart">
+            <button class="add-to-cart">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+    `;
+  }
 }
+
+renderDishes(foods);
 
 render();
 
@@ -217,4 +272,54 @@ cartContainer.addEventListener("click", function (e) {
   console.log(cart);
 
   render();
+});
+
+const categories = document.querySelector(".categories-list");
+
+categories.addEventListener("click", function (e) {
+  const category = e.target.closest(".category-item");
+
+  if (!category) {
+    return;
+  }
+
+  const type = category.dataset.category;
+
+  let filteredFoods;
+
+  if (type === "all") {
+    filteredFoods = foods;
+  }
+
+  if (type === "affordable") {
+    filteredFoods = foods.filter(function (food) {
+      return food.price < 500;
+    });
+  }
+
+  if (type === "classy") {
+    filteredFoods = foods.filter(function (food) {
+      return food.price >= 1200;
+    });
+  }
+
+  if (type === "spicy") {
+    filteredFoods = foods.filter(function (food) {
+      return food.spicy === true;
+    });
+  }
+
+  if (type === "fasting") {
+    filteredFoods = foods.filter(function (food) {
+      return food.fasting === true;
+    });
+  }
+
+  if (type === "non-fasting") {
+    filteredFoods = foods.filter(function (food) {
+      return food.fasting === false;
+    });
+  }
+
+  renderDishes(filteredFoods);
 });

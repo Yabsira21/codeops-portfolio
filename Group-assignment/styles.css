@@ -221,6 +221,34 @@ body {
   font-size: 26px;
   border: 1px solid #2a2a32;
   flex-shrink: 0;
+  position: relative;
+}
+
+.category-item::before {
+  /* content: "ETB"; */
+  position: absolute;
+  top: 90%;
+  font-size: 10px;
+  /* position: absolute; */
+}
+.category-item:nth-of-type(1)::before {
+  content: "All";
+}
+
+.category-item:nth-of-type(2)::before {
+  content: "Fasting";
+}
+.category-item:nth-of-type(3)::before {
+  content: "Affordable";
+}
+.category-item:nth-of-type(4)::before {
+  content: "Spicy";
+}
+.category-item:nth-of-type(5)::before {
+  content: "Non-fasting";
+}
+.category-item:nth-of-type(6)::before {
+  content: "classy";
 }
 
 /* Popular Dishes Section */
