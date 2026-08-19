@@ -112,9 +112,9 @@ function render() {
 
       </div>
 
-      <div class="edit-btn">
+      <button class="edit-btn" data-action="trash">
         <i class="fa-solid fa-trash"></i>
-      </div>
+      </button>
     `;
 
     cartContainer.appendChild(li);
@@ -164,6 +164,25 @@ dishesGrid.addEventListener("click", function (e) {
 });
 
 cartContainer.addEventListener("click", function (e) {
+  //trash
+  if (e.target.closest(".edit-btn")) {
+    const btn = e.target.closest(".edit-btn");
+    const id = btn.parentElement.dataset.id;
+    const item = cart.find(function (item) {
+      return item.food.id === id;
+    });
+    cart = cart.filter(function (item) {
+      return item.food.id !== id;
+    });
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    console.log(cart);
+
+    render();
+    return;
+    // const id = btn.closest(".cart.item").dataset.id;
+  }
+
   const button = e.target.closest(".qty-btn");
 
   if (!button) {
@@ -190,9 +209,6 @@ cartContainer.addEventListener("click", function (e) {
         return item.food.id !== id;
       });
     }
-  }
-
-  if (button.data.action === "trash") {
   }
 
   localStorage.setItem("cart", JSON.stringify(cart));
