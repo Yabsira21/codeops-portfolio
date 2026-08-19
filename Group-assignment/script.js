@@ -43,8 +43,8 @@ let foods = [
     rating: 3.45,
   },
 ];
-// let cart = JSON.parse(localStorage.getItem("cart")) || [];
-let cart = [];
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+// let cart = [];
 let cartContainer = document.querySelector(".cart-items");
 for (let food of foods) {
   document.querySelector(".dishes-grid").innerHTML += `
@@ -59,6 +59,18 @@ for (let food of foods) {
         </div>
     </div>
   `;
+}
+
+render();
+
+function calculateTotal(cart) {
+  let total = 0;
+
+  for (let item of cart) {
+    total += item.food.price * item.qty;
+  }
+
+  return total;
 }
 
 function render() {
@@ -101,12 +113,20 @@ function render() {
       </div>
 
       <div class="edit-btn">
-        <i class="fa-solid fa-pen"></i>
+        <i class="fa-solid fa-trash"></i>
       </div>
     `;
 
     cartContainer.appendChild(li);
   });
+  const subTotal = calculateTotal(cart);
+  if (subTotal <= 0) {
+    document.querySelector(".sub-total").textContent = `ETB 0`;
+    document.querySelector(".grand-total").textContent = `ETB 0`;
+    return;
+  }
+  document.querySelector(".sub-total").textContent = `ETB ${subTotal}`;
+  document.querySelector(".grand-total").textContent = `ETB ${subTotal + 10}`;
 }
 
 const dishesGrid = document.querySelector(".dishes-grid");
@@ -170,6 +190,9 @@ cartContainer.addEventListener("click", function (e) {
         return item.food.id !== id;
       });
     }
+  }
+
+  if (button.data.action === "trash") {
   }
 
   localStorage.setItem("cart", JSON.stringify(cart));
