@@ -43,7 +43,9 @@ let foods = [
     rating: 3.45,
   },
 ];
-
+// let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let cart = [];
+let cartContainer = document.querySelector(".cart-items");
 for (let food of foods) {
   document.querySelector(".dishes-grid").innerHTML += `
   <div class="dish-card" data-id="${food.id}">
@@ -59,6 +61,54 @@ for (let food of foods) {
   `;
 }
 
+function render() {
+  cartContainer.innerHTML = "";
+
+  cart.forEach(function (i) {
+    const li = document.createElement("div");
+
+    li.classList.add("cart-item");
+    li.dataset.id = i.food.id;
+
+    li.innerHTML = `
+      <div class="cart-item-info">
+
+        <div class="cart-item-icon">
+          <img src="${i.food.image}" alt="${i.food.name}">
+        </div>
+
+        <div class="cart-item-details">
+          <h4>${i.food.name}</h4>
+
+          <p>ETB ${i.food.price.toFixed(2)}</p>
+
+          <div class="cart-item-qty">
+
+            <button class="qty-btn" data-action="minus">
+              <i class="fa-solid fa-minus"></i>
+            </button>
+
+            <span>${i.qty}</span>
+
+            <button class="qty-btn" data-action="plus">
+              <i class="fa-solid fa-plus"></i>
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="edit-btn">
+        <i class="fa-solid fa-pen"></i>
+      </div>
+    `;
+
+    cartContainer.appendChild(li);
+  });
+}
+
 const dishesGrid = document.querySelector(".dishes-grid");
 
 dishesGrid.addEventListener("click", function (e) {
@@ -67,9 +117,64 @@ dishesGrid.addEventListener("click", function (e) {
   }
 
   const card = e.target.closest(".dish-card");
+
   const id = card.dataset.id;
 
-  const food = foods.find((food) => food.id === id);
+  const food = foods.find(function (food) {
+    return food.id === id;
+  });
 
-  console.log(food);
+  const existingItem = cart.find(function (item) {
+    return item.food.id === id;
+  });
+
+  if (existingItem) {
+    existingItem.qty++;
+  } else {
+    cart.push({
+      food: food,
+      qty: 1,
+    });
+  }
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+
+  render();
+  console.log(cart);
+});
+
+cartContainer.addEventListener("click", function (e) {
+  const button = e.target.closest(".qty-btn");
+
+  if (!button) {
+    return;
+  }
+
+  const cartItem = button.closest(".cart-item");
+
+  const id = cartItem.dataset.id;
+
+  const item = cart.find(function (item) {
+    return item.food.id === id;
+  });
+
+  if (button.dataset.action === "plus") {
+    item.qty++;
+  }
+
+  if (button.dataset.action === "minus") {
+    item.qty--;
+
+    if (item.qty === 0) {
+      cart = cart.filter(function (item) {
+        return item.food.id !== id;
+      });
+    }
+  }
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+
+  console.log(cart);
+
+  render();
 });
