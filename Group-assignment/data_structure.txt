@@ -1,0 +1,22 @@
+// // 1. food
+// const food = {
+//   id: "1",
+//   category: "Main",
+//   price: 240, // ETB
+//   spicy: true,
+//   image: "doro.jpg",
+// };
+
+// // 2. cart
+// const cart = [{ food, qty: 1 }];
+
+// // 3. order
+// const order = {
+//   id: 1,
+//   foods: [{ food, qty: 2 }],
+//   customer: {
+//     name: "Yabsira",
+//     phone: "0912345678",
+//     address: "Bole, Addis Ababa",
+//   },
+// };

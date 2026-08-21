@@ -615,6 +615,10 @@ main::-webkit-scrollbar {
   display: none;
 }
 
+.edit-btn:hover {
+  cursor: pointer;
+}
+
 .modal-overlay {
   position: fixed;
   inset: 0;

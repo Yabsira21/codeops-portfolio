@@ -1,3 +1,8 @@
+// 3 types of render
+// render - for cart
+// renderOrder - for order
+//renderDishes - for the main dish list
+
 let foods = [
   {
     id: "1",
@@ -46,8 +51,6 @@ let orders = [];
 let cartContainer = document.querySelector(".cart-items");
 let tableContainer = document.querySelector("tbody");
 
-// document.querySelector('.table-wrapper').classList.add("")
-
 function render() {
   cartContainer.innerHTML = "";
 
@@ -94,6 +97,7 @@ function render() {
 
     cartContainer.appendChild(li);
   });
+
   const subTotal = calculateTotal(cart);
   if (subTotal <= 0) {
     document.querySelector(".sub-total").textContent = `ETB 0`;
@@ -175,6 +179,7 @@ function calculateTotal(cart) {
   return total;
 }
 
+// add to cart functionality
 const dishesGrid = document.querySelector(".dishes-grid");
 
 dishesGrid.addEventListener("click", function (e) {
@@ -195,7 +200,6 @@ dishesGrid.addEventListener("click", function (e) {
   });
 
   if (existingItem) {
-    // existingItem.qty++;
     return;
   } else {
     cart.push({
@@ -207,9 +211,9 @@ dishesGrid.addEventListener("click", function (e) {
   localStorage.setItem("cart", JSON.stringify(cart));
 
   render();
-  console.log(cart);
 });
 
+// cart functionality
 cartContainer.addEventListener("click", function (e) {
   //trash
   if (e.target.closest(".edit-btn")) {
@@ -227,7 +231,6 @@ cartContainer.addEventListener("click", function (e) {
 
     render();
     return;
-    // const id = btn.closest(".cart.item").dataset.id;
   }
 
   const button = e.target.closest(".qty-btn");
@@ -264,6 +267,8 @@ cartContainer.addEventListener("click", function (e) {
 
   render();
 });
+
+// filter functionality
 
 const categories = document.querySelector(".categories-list");
 
@@ -315,6 +320,8 @@ categories.addEventListener("click", function (e) {
   renderDishes(filteredFoods);
 });
 
+// checkout functionality
+
 const checkoutBtn = document.querySelector(".checkout-btn");
 const checkoutModal = document.querySelector("#checkout-modal");
 const closeModal = document.querySelector("#close-modal");
@@ -341,7 +348,6 @@ checkoutForm.addEventListener("submit", function (e) {
   const phone = document.querySelector("#customer-phone").value.trim();
   const address = document.querySelector("#customer-address").value.trim();
 
-  // Basic validation
   if (name.length < 2) {
     alert("Please enter a valid name.");
     return;
@@ -360,8 +366,6 @@ checkoutForm.addEventListener("submit", function (e) {
   };
 
   orders.push(order);
-
-  //   localStorage.setItem("orders", JSON.stringify(orders));
 
   console.log("Order created:", order);
   console.log("All orders:", orders);
@@ -383,26 +387,3 @@ checkoutForm.addEventListener("submit", function (e) {
 
   //   renderDishes();
 });
-
-// // 1. food
-// const food = {
-//   id: "1",
-//   category: "Main",
-//   price: 240, // ETB
-//   spicy: true,
-//   image: "doro.jpg",
-// };
-
-// // 2. cart
-// const cart = [{ food, qty: 1 }];
-
-// // 3. order
-// const order = {
-//   id: 1,
-//   foods: [{ food, qty: 2 }],
-//   customer: {
-//     name: "Yabsira",
-//     phone: "0912345678",
-//     address: "Bole, Addis Ababa",
-//   },
-// };
