@@ -1,0 +1,42 @@
+[
+  {
+    "id": "1",
+    "category": "Main",
+    "name": "Doro wot",
+    "price": 800,
+    "spicy": true,
+    "fasting": false,
+    "image": "Assets/doro.png",
+    "rating": 4.5
+  },
+  {
+    "id": "2",
+    "category": "Main",
+    "name": "Gomen",
+    "price": 300,
+    "spicy": false,
+    "fasting": true,
+    "image": "Assets/gomen.png",
+    "rating": 3.45
+  },
+  {
+    "id": "3",
+    "category": "Main",
+    "name": "Kitfo",
+    "price": 2000,
+    "spicy": true,
+    "fasting": false,
+    "image": "Assets/kitfo.png",
+    "rating": 4.45
+  },
+  {
+    "id": "4",
+    "category": "Main",
+    "name": "Kurte",
+    "price": 1500,
+    "spicy": true,
+    "fasting": false,
+    "image": "Assets/kuret.png",
+    "rating": 4.85
+  }
+]

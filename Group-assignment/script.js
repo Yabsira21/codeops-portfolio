@@ -1,58 +1,59 @@
-// 3 types of render
-// render - for cart
-// renderOrder - for order
-//renderDishes - for the main dish list
-
-let foods = [
-  {
-    id: "1",
-    category: "Main",
-    name: "Doro wot",
-    price: 800, // ETB
-    spicy: true,
-    fasting: false,
-    image: "Assets/doro.png",
-    rating: 4.5,
-  },
-  {
-    id: "2",
-    category: "Main",
-    name: "Gomen",
-    price: 300, // ETB
-    spicy: false,
-    fasting: true,
-    image: "Assets/gomen.png",
-    rating: 3.45,
-  },
-  {
-    id: "3",
-    category: "Main",
-    name: "Kitfo",
-    price: 2000, // ETB
-    spicy: true,
-    fasting: false,
-    image: "Assets/kitfo.png",
-    rating: 4.45,
-  },
-  {
-    id: "4",
-    category: "Main",
-    name: "Kurte",
-    price: 1500, // ETB
-    spicy: true,
-    fasting: false,
-    image: "Assets/kuret.png",
-    rating: 4.85,
-  },
-];
+let foods = [];
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 let orders = [];
 
 let cartContainer = document.querySelector(".cart-items");
 let tableContainer = document.querySelector("tbody");
 
-function render() {
+async function loadFoods() {
+  // Show loading state
+  dishesGrid.innerHTML = `
+    <div class="loading">
+      <img src="Assets/salad.gif" />
+      <p>loading...</p>
+    </div>
+  `;
+
+  try {
+    // Fetch data from our "remote server"
+    const response = await fetch("./data.json");
+
+    const data = await response.json();
+
+    await new Promise(function (resolve) {
+      setTimeout(resolve, 2000);
+    });
+
+    // Store the fetched data
+    foods = data;
+
+    // Render the application
+    render();
+  } catch (error) {
+    console.error("Failed to load foods:", error);
+
+    dishesGrid.innerHTML = `
+      <div class="loading">
+        <p>Failed to load foods.</p>
+      </div>
+    `;
+  }
+}
+
+function renderCart() {
   cartContainer.innerHTML = "";
+
+  if (cart.length === 0) {
+    cartContainer.innerHTML = `
+      <div class="empty-state">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <p>Your cart is empty</p>
+        <span>Add something delicious to get started.</span>
+      </div>
+    `;
+
+    return;
+  }
 
   cart.forEach(function (i) {
     const li = document.createElement("div");
@@ -69,11 +70,9 @@ function render() {
 
         <div class="cart-item-details">
           <h4>${i.food.name}</h4>
-
           <p>ETB ${i.food.price.toFixed(2)}</p>
 
           <div class="cart-item-qty">
-
             <button class="qty-btn" data-action="minus">
               <i class="fa-solid fa-minus"></i>
             </button>
@@ -83,9 +82,7 @@ function render() {
             <button class="qty-btn" data-action="plus">
               <i class="fa-solid fa-plus"></i>
             </button>
-
           </div>
-
         </div>
 
       </div>
@@ -97,86 +94,144 @@ function render() {
 
     cartContainer.appendChild(li);
   });
-
-  const subTotal = calculateTotal(cart);
-  if (subTotal <= 0) {
-    document.querySelector(".sub-total").textContent = `ETB 0`;
-    document.querySelector(".grand-total").textContent = `ETB 0`;
-    return;
-  }
-  document.querySelector(".sub-total").textContent = `ETB ${subTotal}`;
-  document.querySelector(".grand-total").textContent = `ETB ${subTotal + 10}`;
 }
-
-function renderDishes(foodList) {
+function renderMenu(foodList = foods) {
   const dishesGrid = document.querySelector(".dishes-grid");
 
   dishesGrid.innerHTML = "";
 
+  if (foodList.length === 0) {
+    dishesGrid.innerHTML = `
+      <div class="empty-state">
+        <i class="fa-solid fa-utensils"></i>
+        <p>No dishes found</p>
+        <span>Try searching for something else.</span>
+      </div>
+    `;
+
+    return;
+  }
+
   for (let food of foodList) {
     dishesGrid.innerHTML += `
       <div class="dish-card" data-id="${food.id}">
+
         <div class="dish-img">
-          <img src="${food.image}" alt="">
+          <img src="${food.image}" alt="${food.name}">
         </div>
 
-        <div class="dish-name">${food.name}</div>
+        <div class="dish-name">
+          ${food.name}
+        </div>
 
-        <div class="dish-subtext">Starting From</div>
+        <div class="dish-subtext">
+          Starting From
+        </div>
 
         <div class="dish-price">
           ETB ${food.price.toFixed(2)}
         </div>
 
         <div class="dish-meta">
+
           <div class="dish-rating">
-            <i class="fa-solid fa-star"></i> ${food.rating}
+            <i class="fa-solid fa-star"></i>
+            ${food.rating}
           </div>
 
           <div class="dish-add-to-cart">
-            <button class="add-to-cart">Add to Cart</button>
+            <button class="add-to-cart">
+              Add to Cart
+            </button>
           </div>
+
         </div>
+
       </div>
     `;
   }
 }
 
-function renderOrderList() {
+function renderOrders() {
   tableContainer.innerHTML = "";
+
   orders.forEach(function (i) {
     const tr = document.createElement("tr");
 
     tr.innerHTML = `
-            <td>
-                <div class="customer-cell">
-                    <div class="avatar"
-                        style="background-image: url('https://i.pravatar.cc/100?img=12');"></div>
-                    ${i.customer.name}
-                </div>
-            </td>
-            <td>${i.id}</td>
-            <td>${i.customer.address}</td>
-            <td>ETB ${i.total}</td>
-             <td><span class="status-badge pending">Pending</span></td>
-                          
-                            `;
+      <td>
+        <div class="customer-cell">
+
+          <div
+            class="avatar"
+            style="background-image: url('https://i.pravatar.cc/100?img=12');">
+          </div>
+
+          ${i.customer.name}
+
+        </div>
+      </td>
+
+      <td>${i.id}</td>
+
+      <td>${i.customer.address}</td>
+
+      <td>ETB ${i.total}</td>
+
+      <td>
+        <span class="status-badge pending">
+          Pending
+        </span>
+      </td>
+    `;
+
     tableContainer.appendChild(tr);
   });
 }
 
-renderDishes(foods);
+function render(foodList = foods) {
+  renderCart();
+  renderMenu(foodList);
+  renderOrders();
+
+  const subTotal = calculateTotal(cart);
+
+  if (subTotal <= 0) {
+    document.querySelector(".sub-total").textContent = "ETB 0";
+    document.querySelector(".grand-total").textContent = "ETB 0";
+    return;
+  }
+
+  document.querySelector(".sub-total").textContent = `ETB ${subTotal}`;
+
+  document.querySelector(".grand-total").textContent = `ETB ${subTotal + 10}`;
+}
 
 render();
 
 function calculateTotal(cart) {
-  let total = 0;
+  return cart.reduce(function (total, item) {
+    return total + item.food.price * item.qty;
+  }, 0);
+}
 
-  for (let item of cart) {
-    total += item.food.price * item.qty;
+function validate(name, phone, address) {
+  if (name.trim() === "") {
+    return "Name is required.";
   }
 
-  return total;
+  // Ethiopian mobile: 09XXXXXXXX or 07XXXXXXXX
+  const phoneRegex = /^(09|07)\d{8}$/;
+
+  if (!phoneRegex.test(phone.trim())) {
+    return "Please enter a valid Ethiopian phone number.";
+  }
+
+  if (address.trim() === "") {
+    return "Address is required.";
+  }
+
+  return null;
 }
 
 // add to cart functionality
@@ -219,9 +274,9 @@ cartContainer.addEventListener("click", function (e) {
   if (e.target.closest(".edit-btn")) {
     const btn = e.target.closest(".edit-btn");
     const id = btn.parentElement.dataset.id;
-    const item = cart.find(function (item) {
-      return item.food.id === id;
-    });
+    // const item = cart.find(function (item) {
+    //   return item.food.id === id;
+    // });
     cart = cart.filter(function (item) {
       return item.food.id !== id;
     });
@@ -317,7 +372,7 @@ categories.addEventListener("click", function (e) {
     });
   }
 
-  renderDishes(filteredFoods);
+  render(filteredFoods);
 });
 
 // checkout functionality
@@ -348,10 +403,16 @@ checkoutForm.addEventListener("submit", function (e) {
   const phone = document.querySelector("#customer-phone").value.trim();
   const address = document.querySelector("#customer-address").value.trim();
 
-  if (name.length < 2) {
-    alert("Please enter a valid name.");
+  const error = validate(name, phone, address);
+
+  const errorMessage = document.querySelector(".error-msg-form-p");
+
+  if (error) {
+    errorMessage.textContent = error;
     return;
   }
+
+  errorMessage.textContent = "";
 
   const order = {
     id: Date.now(),
@@ -381,9 +442,27 @@ checkoutForm.addEventListener("submit", function (e) {
 
   checkoutForm.reset();
 
-  renderOrderList();
-
   render();
-
-  //   renderDishes();
 });
+
+const searchInput = document.querySelector(".search-input");
+
+searchInput.addEventListener("input", function (e) {
+  const searchTerm = e.target.value.toLowerCase().trim();
+
+  const filteredFoods = foods.filter(function (food) {
+    return food.name.toLowerCase().includes(searchTerm);
+  });
+
+  render(filteredFoods);
+});
+
+loadFoods();
+
+// task done
+// 1 render function instead of 3
+// 2 data.json
+// 3 searching with keystroke
+// 4 change calulcate price to reduce
+// 5 validate and clean error message
+// 6 friendly menu and cart empties
