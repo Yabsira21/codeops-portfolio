@@ -207,6 +207,24 @@ function render(foodList = foods) {
   document.querySelector(".grand-total").textContent = `ETB ${subTotal + 10}`;
 }
 
+function render2() {
+  renderCart();
+  // renderMenu(foodList);
+  renderOrders();
+
+  const subTotal = calculateTotal(cart);
+
+  if (subTotal <= 0) {
+    document.querySelector(".sub-total").textContent = "ETB 0";
+    document.querySelector(".grand-total").textContent = "ETB 0";
+    return;
+  }
+
+  document.querySelector(".sub-total").textContent = `ETB ${subTotal}`;
+
+  document.querySelector(".grand-total").textContent = `ETB ${subTotal + 10}`;
+}
+
 render();
 
 function calculateTotal(cart) {
@@ -265,7 +283,7 @@ dishesGrid.addEventListener("click", function (e) {
 
   localStorage.setItem("cart", JSON.stringify(cart));
 
-  render();
+  render2();
 });
 
 // cart functionality

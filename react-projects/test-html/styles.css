@@ -1,0 +1,29 @@
+.box {
+  height: 500px;
+  background-color: red;
+  width: 500px;
+  position: relative;
+}
+
+.loader {
+  width: 10%;
+  background-color: rgb(58, 3, 3);
+  height: 100%;
+  /* transform: ; */
+  animation: mover 1s;
+  animation-iteration-count: infinite;
+  /* animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1); */
+  animation-timing-function: ease-out;
+  position: absolute;
+}
+
+@keyframes mover {
+  0% {
+    left: 0;
+    /* transform: translateX(0%); */
+  }
+  100% {
+    left: 90%;
+    /* transform: translateX(100%); */
+  }
+}
