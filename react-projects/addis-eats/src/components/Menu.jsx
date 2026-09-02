@@ -1,4 +1,6 @@
+import { useState } from "react";
 import Dish from "../components/Dish";
+import CategoryList from "./CategoryList";
 import MenuItem from "./MenuItem";
 
 // const menu = [
@@ -55,23 +57,31 @@ const menu = [
   },
 ];
 
-function Menu() {
+function Menu({ category }) {
+  const shown = menu.filter((d) => d.category === category);
+
+  if (shown.length === 0) return <p>No {category} dishes.</p>;
+
   return (
-    <div>
-      {menu.map((d) => (
-        // <MenuItem
-        //   key={d.id}
-        //   name={d.name}
-        //   price={d.price}
-        //   desc={d.description}
-        //   category={d.category}
-        //   img={d.img}
-        //   spicy={d.spicy}
-        // />
-        <Dish key={d.id} name={d.name} price={d.price} spicy={d.spicy} />
-      ))}
-    </div>
+    <>
+      {/* <CategoryList setCategory={setCategory} /> */}
+      <div className="menu">
+        {shown.map((d) => (
+          <Dish key={d.id} name={d.name} price={d.price} spicy={d.spicy} />
+        ))}
+      </div>
+    </>
   );
 }
 
 export default Menu;
+
+// <MenuItem
+//   key={d.id}
+//   name={d.name}
+//   price={d.price}
+//   desc={d.description}
+//   category={d.category}
+//   img={d.img}
+//   spicy={d.spicy}
+// />

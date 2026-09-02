@@ -131,7 +131,7 @@ function App() {
   return (
     <div>
       <Header />
-      <Menu />
+      <Menu category={"Main"} />
     </div>
   );
 }

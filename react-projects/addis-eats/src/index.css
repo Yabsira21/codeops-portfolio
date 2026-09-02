@@ -104,7 +104,7 @@ p {
 }
 
 .card {
-  /* border: 1px solid #e9e8e2; */
+  border: 1px solid #e9e8e2;
   margin: 1rem 0;
   padding-bottom: 1rem;
   display: flex;
@@ -113,4 +113,38 @@ p {
 
 img {
   height: 148px;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+  width: 100%;
+  /* justify-content: space-around; */
+}
+
+.dish {
+  border: 1px solid #e9e8e2;
+  position: relative;
+  width: 12rem;
+}
+
+.spicy {
+  position: absolute;
+  background-color: red;
+  padding: 0.25rem 0.5rem;
+  right: 0.5rem;
+  top: 0.5rem;
+}
+
+.category {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.category button {
+  color: #16171d;
 }

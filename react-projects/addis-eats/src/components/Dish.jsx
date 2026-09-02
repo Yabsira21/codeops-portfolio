@@ -6,7 +6,7 @@ function Dish({ name, price, spicy }) {
     <div className="dish">
       <h3>{name}</h3>
       <p>{price} ETB</p>
-      <p>{spicy ? "Spicy" : "Not Spicy"}</p>
+      <div className={spicy ? "spicy" : ""}>{spicy ? "Spicy" : ""}</div>
     </div>
   );
 }
