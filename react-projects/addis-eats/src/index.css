@@ -50,6 +50,12 @@
   }
 }
 
+/* * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+} */
+
 body {
   margin: 0;
 }
@@ -128,12 +134,15 @@ img {
   border: 1px solid #e9e8e2;
   position: relative;
   width: 12rem;
+  padding-bottom: 1rem;
 }
 
 .spicy {
   position: absolute;
   background-color: red;
-  padding: 0.25rem 0.5rem;
+  color: white;
+  font-size: 0.5rem;
+  padding: 0 0.5rem;
   right: 0.5rem;
   top: 0.5rem;
 }
@@ -147,4 +156,38 @@ img {
 
 .category button {
   color: #16171d;
+}
+
+button.selected {
+  background-color: #08060d;
+  color: white;
+  border: none;
+}
+
+.total {
+  margin-bottom: 1rem;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+  justify-self: flex-start;
+  background-color: #08060d;
+  padding: 10rem;
+}
+
+.main-container {
+  display: flex;
+  /* align-items: center; */
+  justify-content: space-around;
+}
+input {
+  outline: none;
+}
+
+.red {
+  border: 1px solid red;
 }

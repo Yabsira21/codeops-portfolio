@@ -1,13 +1,5 @@
-import { useState } from "react";
 import Dish from "../components/Dish";
-import CategoryList from "./CategoryList";
-import MenuItem from "./MenuItem";
-
-// const menu = [
-//   { id: 1, name: "Doro Wat", price: 840 },
-//   { id: 2, name: "Shiro", price: 300 },
-//   { id: 3, name: "Tibs", price: 600 },
-// ];
+import { useState } from "react";
 
 const menu = [
   {
@@ -58,16 +50,26 @@ const menu = [
 ];
 
 function Menu({ category }) {
-  const shown = menu.filter((d) => d.category === category);
+  const [total, setTotal] = useState(0);
+  const shown =
+    category == "All" ? menu : menu.filter((d) => d.category === category);
 
   if (shown.length === 0) return <p>No {category} dishes.</p>;
 
   return (
     <>
+      <p className="total">{total} ETB</p>
       {/* <CategoryList setCategory={setCategory} /> */}
       <div className="menu">
         {shown.map((d) => (
-          <Dish key={d.id} name={d.name} price={d.price} spicy={d.spicy} />
+          <Dish
+            key={d.id}
+            name={d.name}
+            price={d.price}
+            spicy={d.spicy}
+            setTotal={setTotal}
+            total={total}
+          />
         ))}
       </div>
     </>
