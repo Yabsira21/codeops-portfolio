@@ -7,10 +7,12 @@ function Menu({ category }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   useEffect(() => {
-    const ctrl = new AbortController();
+    // const ctrl = new AbortController();
     async function load() {
       try {
-        const res = await fetch("/src/data/data.json");
+        const res = await fetch("/src/data/data.json", {
+          // signal: ctrl.signal,
+        });
         console.log("yes");
         if (!res.ok) throw new Error("Could not load the menu");
         // console.log(await res.json());
@@ -23,7 +25,7 @@ function Menu({ category }) {
       }
     }
     load();
-    return () => ctrl.abort();
+    // return () => ctrl.abort();
   }, [category]);
 
   const shown =
