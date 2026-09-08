@@ -9,11 +9,7 @@ function Header({ setSearchTerm }) {
   }, []);
 
   function handleSubmit(e) {
-    // e.prevent
-    console.log("yesus");
     e.preventDefault();
-    // console.log("hi");
-    console.log(searchRef.current.value);
     setSearchTerm(searchRef.current.value);
   }
 
