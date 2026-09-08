@@ -1,8 +1,12 @@
 import Dish from "../components/Dish";
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
-function Menu({ category, searchTerm, setSearchTerm, setCart, cart }) {
+function Menu({ searchTerm, setSearchTerm, setCart, cart }) {
+  const [searchParams] = useSearchParams();
+
+  const category = searchParams.get("category") || "All";
   // const [total, setTotal] = useState(0);
   const [dishes, setDishes] = useState([]);
   const [loading, setLoading] = useState(true);
