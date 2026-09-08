@@ -7,19 +7,21 @@ import Menu from "./Menu";
 import CategoryList from "./CategoryList";
 // import Form from "./components/Form";
 import Form from "./Form";
-function Home() {
+function Home({ searchTerm }) {
   const [category, setCategory] = useState("All");
-  const [searchTerm, setSearchTerm] = useState("");
+
   console.log(category);
   return (
-    <div className="main-container">
-      <div>
-        <Header setSearchTerm={setSearchTerm} />
-        <CategoryList category={category} setCategory={setCategory} />
-        <Menu category={category} searchTerm={searchTerm} />
+    <>
+      {/* <Header setSearchTerm={setSearchTerm} /> */}
+      <div className="main-container">
+        <div>
+          <CategoryList category={category} setCategory={setCategory} />
+          <Menu category={category} searchTerm={searchTerm} />
+        </div>
+        <Form />
       </div>
-      <Form />
-    </div>
+    </>
   );
 }
 
