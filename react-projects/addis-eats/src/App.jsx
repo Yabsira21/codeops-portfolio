@@ -5,6 +5,7 @@ import Layout from "./components/Layout";
 import { useState } from "react";
 import NotFound from "./components/NotFound";
 import Cart from "./pages/Cart";
+import DishPage from "./pages/DishPage";
 
 function App() {
   // const [category, setCategory] = useState("All");
@@ -26,6 +27,7 @@ function App() {
             }
           />
           <Route path="/cart" element={<Cart cart={cart} />} />
+          <Route path="menu/:id" element={<DishPage />} />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
