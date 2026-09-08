@@ -1,7 +1,8 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
-function Dish({ name, price, spicy, cart, setCart }) {
+function Dish({ id, name, price, spicy, cart, setCart }) {
   function handleAdd() {
     const existingItem = cart.find((cartItem) => cartItem.item.name === name);
 
@@ -26,7 +27,9 @@ function Dish({ name, price, spicy, cart, setCart }) {
 
   return (
     <div className="dish">
-      <h3>{name}</h3>
+      <Link to={`/menu/${id}`}>
+        <h3>{name}</h3>
+      </Link>
       <p>{price} ETB</p>
       <div className={spicy ? "spicy" : ""}>{spicy ? "Spicy" : ""}</div>
       {/* <p>Count: {count}</p> */}

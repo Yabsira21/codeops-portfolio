@@ -1,6 +1,6 @@
 import Dish from "../components/Dish";
 import { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+
 import { useSearchParams } from "react-router-dom";
 
 function Menu({ searchTerm, setSearchTerm, setCart, cart }) {
@@ -70,18 +70,17 @@ function Menu({ searchTerm, setSearchTerm, setCart, cart }) {
       {/* <CategoryList setCategory={setCategory} /> */}
       <div className="menu">
         {shownWithSearch.map((d) => (
-          <Link to={`/menu/${d.id}`} key={d.id}>
-            <Dish
-              // key={d.id}
-              name={d.name}
-              price={d.price}
-              spicy={d.spicy}
-              cart={cart}
-              setCart={setCart}
-              // setTotal={setTotal}
-              // total={total}
-            />
-          </Link>
+          <Dish
+            key={d.id}
+            id={d.id}
+            name={d.name}
+            price={d.price}
+            spicy={d.spicy}
+            cart={cart}
+            setCart={setCart}
+            // setTotal={setTotal}
+            // total={total}
+          />
         ))}
       </div>
     </>
