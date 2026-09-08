@@ -6,7 +6,6 @@ function Menu({ category, searchTerm }) {
   const [dishes, setDishes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  // const [serchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     // const ctrl = new AbortController();
@@ -66,13 +65,3 @@ function Menu({ category, searchTerm }) {
 }
 
 export default Menu;
-
-// <MenuItem
-//   key={d.id}
-//   name={d.name}
-//   price={d.price}
-//   desc={d.description}
-//   category={d.category}
-//   img={d.img}
-//   spicy={d.spicy}
-// />

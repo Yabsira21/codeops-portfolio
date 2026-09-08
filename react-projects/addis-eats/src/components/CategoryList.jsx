@@ -2,11 +2,6 @@ const categories = ["All", "Main", "Drink"];
 
 function CategoryList({ category, setCategory }) {
   return (
-    // <div className="category">
-    //   <button onClick={() => setCategory("all")}>All</button>
-    //   <button onClick={() => setCategory("Main")}>Spicy</button>
-    //   <button onClick={() => setCategory("Drink")}>Drink</button>
-    // </div>
     <div className="category">
       {categories.map((c, i) => (
         <button
