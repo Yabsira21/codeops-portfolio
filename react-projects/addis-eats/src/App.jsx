@@ -6,13 +6,14 @@ import Form from "./components/Form";
 
 function App() {
   const [category, setCategory] = useState("All");
+  const [searchTerm, setSearchTerm] = useState("");
   console.log(category);
   return (
     <div className="main-container">
       <div>
-        <Header />
+        <Header setSearchTerm={setSearchTerm} />
         <CategoryList category={category} setCategory={setCategory} />
-        <Menu category={category} />
+        <Menu category={category} searchTerm={searchTerm} />
       </div>
       <Form />
     </div>

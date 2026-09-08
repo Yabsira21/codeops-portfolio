@@ -1,11 +1,13 @@
 import Dish from "../components/Dish";
 import { useState, useEffect } from "react";
 
-function Menu({ category }) {
+function Menu({ category, searchTerm }) {
   const [total, setTotal] = useState(0);
   const [dishes, setDishes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  // const [serchTerm, setSearchTerm] = useState("");
+
   useEffect(() => {
     // const ctrl = new AbortController();
     async function load() {
@@ -31,6 +33,14 @@ function Menu({ category }) {
   const shown =
     category == "All" ? dishes : dishes.filter((d) => d.category === category);
 
+  // const shownWithSearch = searchTerm == "" ? shown : shown.filter((d) => )
+  const shownWithSearch =
+    searchTerm === ""
+      ? shown
+      : shown.filter((d) =>
+          d.name.toLowerCase().includes(searchTerm.toLowerCase()),
+        );
+
   if (loading) return <p>Loading the menu…</p>;
   if (error) return <p className="err">{error}</p>;
   if (dishes.length === 0) return <p>No dishes yet.</p>;
@@ -40,7 +50,7 @@ function Menu({ category }) {
       <p className="total">{total} ETB</p>
       {/* <CategoryList setCategory={setCategory} /> */}
       <div className="menu">
-        {shown.map((d) => (
+        {shownWithSearch.map((d) => (
           <Dish
             key={d.id}
             name={d.name}
