@@ -1,10 +1,10 @@
 import { Outlet } from "react-router-dom";
 import Header from "./Header";
 
-function Layout({ setSearchTerm }) {
+function Layout({ cart }) {
   return (
-    <div>
-      <Header setSearchTerm={setSearchTerm} />
+    <div className="main">
+      <Header cart={cart} />
       <Outlet />
     </div>
   );

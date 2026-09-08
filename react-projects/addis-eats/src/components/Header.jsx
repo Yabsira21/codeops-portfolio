@@ -1,25 +1,30 @@
-import { useRef, useEffect } from "react";
+import { FaShoppingCart } from "react-icons/fa";
+import { Link } from "react-router-dom";
+// import {getCartSummary}
+import { getCartSummary } from "../util/cart";
 
-function Header({ setSearchTerm }) {
+function Header({ cart }) {
   const restaurantName = "Addis Café";
-  const searchRef = useRef(null);
-
-  useEffect(() => {
-    searchRef.current.focus();
-  }, []);
-
-  function handleSubmit(e) {
-    e.preventDefault();
-    setSearchTerm(searchRef.current.value);
-  }
+  const { quantity } = getCartSummary(cart);
 
   return (
     <header>
-      <h1>☕{restaurantName}</h1>
+      <Link to={"/"}>
+        <h1>☕{restaurantName}</h1>
+      </Link>
       <h2>Fresh Ethiopian Food & Coffees</h2>
-      <form onSubmit={handleSubmit}>
-        <input ref={searchRef} placeholder="search" />
-      </form>
+      <div className="cart-icon-container">
+        <Link to={"/cart"}>
+          <FaShoppingCart className="cart-icon" size={24} color="#333" />
+          {quantity == 0 ? (
+            <></>
+          ) : (
+            <div className="cart-item-counter">
+              <p>{quantity}</p>
+            </div>
+          )}
+        </Link>
+      </div>
     </header>
   );
 }

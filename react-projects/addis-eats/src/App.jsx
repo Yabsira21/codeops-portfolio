@@ -3,16 +3,31 @@ import Home from "./components/Home";
 import Menu from "./components/Menu";
 import Layout from "./components/Layout";
 import { useState } from "react";
+import NotFound from "./components/NotFound";
+import Cart from "./pages/Cart";
 
 function App() {
   // const [category, setCategory] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
+  const [cart, setCart] = useState([]);
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Layout setSearchTerm={setSearchTerm} />}>
-          <Route path="/" element={<Home searchTerm={searchTerm} />} />
+        <Route path="/" element={<Layout cart={cart} />}>
+          <Route
+            path="/"
+            element={
+              <Home
+                searchTerm={searchTerm}
+                setSearchTerm={setSearchTerm}
+                setCart={setCart}
+                cart={cart}
+              />
+            }
+          />
+          <Route path="/cart" element={<Cart cart={cart} />} />
         </Route>
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );

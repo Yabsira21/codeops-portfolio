@@ -1,11 +1,23 @@
 import Dish from "../components/Dish";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
-function Menu({ category, searchTerm }) {
-  const [total, setTotal] = useState(0);
+function Menu({ category, searchTerm, setSearchTerm, setCart, cart }) {
+  // const [total, setTotal] = useState(0);
   const [dishes, setDishes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const searchRef = useRef(null);
+
+  useEffect(() => {
+    if (!loading) {
+      searchRef.current?.focus();
+    }
+  }, [loading]);
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    setSearchTerm(searchRef.current.value);
+  }
 
   useEffect(() => {
     // const ctrl = new AbortController();
@@ -46,7 +58,10 @@ function Menu({ category, searchTerm }) {
 
   return (
     <>
-      <p className="total">{total} ETB</p>
+      {/* <p className="total">{total} ETB</p> */}
+      <form className="search-form" onSubmit={handleSubmit}>
+        <input ref={searchRef} placeholder="search" />
+      </form>
       {/* <CategoryList setCategory={setCategory} /> */}
       <div className="menu">
         {shownWithSearch.map((d) => (
@@ -55,8 +70,10 @@ function Menu({ category, searchTerm }) {
             name={d.name}
             price={d.price}
             spicy={d.spicy}
-            setTotal={setTotal}
-            total={total}
+            cart={cart}
+            setCart={setCart}
+            // setTotal={setTotal}
+            // total={total}
           />
         ))}
       </div>
