@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 // import {getCartSummary}
 import { getCartSummary } from "../util/cart";
 
-function Header({ cart }) {
+function Header({ name, cart }) {
   const restaurantName = "Addis Café";
   const { quantity } = getCartSummary(cart);
 
@@ -12,7 +12,7 @@ function Header({ cart }) {
       <Link to={"/"}>
         <h1>☕{restaurantName}</h1>
       </Link>
-      <h2>Fresh Ethiopian Food & Coffees</h2>
+      <h2>{name != "" && `Hi ${name}!`} Have Fresh Ethiopian Food & Coffees</h2>
       <div className="cart-icon-container">
         <Link to={"/cart"}>
           <FaShoppingCart className="cart-icon" size={24} color="#333" />

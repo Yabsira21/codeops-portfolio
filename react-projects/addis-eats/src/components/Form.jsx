@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import { Link } from "react-router-dom";
 function Form() {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -25,7 +25,9 @@ function Form() {
         className={!valid && "red"}
       />
       {phone && !valid && <p className="err">Use 09… or +2519…</p>}
-      <button disabled={!valid}>Pay with TeleBirr</button>
+      <Link to="/thank-you">
+        <button disabled={!valid}>Pay with TeleBirr</button>
+      </Link>
     </div>
   );
 }

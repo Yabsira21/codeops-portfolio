@@ -1,6 +1,9 @@
+import { Link } from "react-router-dom";
 import { getCartSummary } from "../util/cart";
+import { useNavigate } from "react-router-dom";
 
-function Cart({ cart }) {
+function Cart({ cart, isLoggedIn }) {
+  const navigate = useNavigate();
   const { total } = getCartSummary(cart);
 
   if (cart.length === 0) {
@@ -18,6 +21,7 @@ function Cart({ cart }) {
           <p>Subtotal: {cartItem.item.price * cartItem.qty} ETB</p>
         </div>
       ))}
+      <button onClick={() => navigate("/form")}>Checkout</button>
     </div>
   );
 }
