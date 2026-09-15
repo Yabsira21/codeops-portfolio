@@ -1,12 +1,20 @@
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
-export const useAuth = create((set) => ({
-  name: "",
-  isLoggedIn: false,
+export const useAuth = create(
+  persist(
+    (set) => ({
+      name: "",
+      isLoggedIn: false,
 
-  login: (name) =>
-    set({
-      name: name,
-      isLoggedIn: true,
+      login: (name) =>
+        set({
+          name: name,
+          isLoggedIn: true,
+        }),
     }),
-}));
+    {
+      name: "auth-storage",
+    },
+  ),
+);
