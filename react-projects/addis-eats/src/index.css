@@ -111,6 +111,12 @@ header {
   padding-bottom: 1rem;
 }
 
+.auth-button {
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+}
+
 .cart-icon-container {
   position: absolute;
   right: 1rem;

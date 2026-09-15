@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useCart } from "../store/store";
+import { useCart } from "../store/cart";
 
 function Dish({ id, name, price, spicy }) {
   const items = useCart((s) => s.items);

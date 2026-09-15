@@ -10,5 +10,9 @@ export const useCart = create((set) => ({
           : cartItem,
       ),
     })),
+  remove: (name) =>
+    set((state) => ({
+      items: state.items.filter((d) => d.item.name !== name),
+    })),
   clear: () => set({ items: [] }),
 }));

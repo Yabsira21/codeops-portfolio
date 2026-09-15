@@ -1,13 +1,17 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../store/auth";
 
-function Login({ setIsLoggedIn, setName }) {
+function Login() {
   const navigate = useNavigate();
   const [inputName, setInputName] = useState("");
+  const login = useAuth((s) => s.login);
 
   function handleLogin() {
-    setName(inputName);
-    setIsLoggedIn(true);
+    // setName(inputName);
+    // setIsLoggedIn(true);
+    console.log("hi");
+    login(inputName);
     navigate("/");
   }
 
@@ -19,7 +23,15 @@ function Login({ setIsLoggedIn, setName }) {
         placeholder="Your name"
       />
 
-      <button onClick={handleLogin}>Login</button>
+      <button
+        // disabled={() => {
+        //   inputName == "";
+        // }}
+        disabled={inputName === ""}
+        onClick={handleLogin}
+      >
+        Login
+      </button>
     </div>
   );
 }

@@ -10,38 +10,37 @@ import Form from "./components/Form";
 import RequireAuth from "./components/RequireAuth";
 import Login from "./components/Login";
 import ThankYou from "./components/ThankYou";
+import { useAuth } from "./store/auth";
 
 function App() {
-  const [name, setName] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const userName = useAuth((s) => s.name);
+  const isLoggedin = useAuth((s) => s.isLoggedIn);
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Layout name={name} />}>
+        <Route path="/" element={<Layout />}>
           <Route
             path="/"
             element={
               <Home searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
             }
           />
-          <Route path="/cart" element={<Cart isLoggedIn={isLoggedIn} />} />
+          <Route path="/cart" element={<Cart />} />
           <Route path="/thank-you" element={<ThankYou />} />
           <Route path="menu/:id" element={<DishPage />} />
           <Route
             path="/form"
             element={
-              <RequireAuth isLoggedIn={isLoggedIn}>
+              <RequireAuth isLoggedIn={isLoggedin}>
                 <Form />
               </RequireAuth>
             }
           />
         </Route>
-        <Route
-          path="/login"
-          element={<Login setIsLoggedIn={setIsLoggedIn} setName={setName} />}
-        />
+        <Route path="/login" element={<Login />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

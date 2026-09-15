@@ -1,12 +1,11 @@
 import { useState } from "react";
 import Menu from "./Menu";
 import CategoryList from "./CategoryList";
-import { useCart } from "../store/store";
+import { useCart } from "../store/cart";
 
 function Home({ searchTerm, setSearchTerm }) {
   const [category, setCategory] = useState("All");
 
-  //   console.log(category);
   return (
     <>
       <div className="main-container">

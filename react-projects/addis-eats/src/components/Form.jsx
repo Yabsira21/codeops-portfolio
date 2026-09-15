@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useCart } from "../store/cart";
+
 function Form() {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [area, setArea] = useState("");
   const valid = /^(?:\+251|0)9\d{8}$/.test(phone);
+  const clear = useCart((s) => s.clear);
 
   return (
     <div className="form-container">
@@ -25,7 +28,13 @@ function Form() {
         className={!valid && "red"}
       />
       {phone && !valid && <p className="err">Use 09… or +2519…</p>}
-      <Link to="/thank-you">
+      <Link
+        to="/thank-you"
+        onClick={() => {
+          console.log("woooow");
+          clear();
+        }}
+      >
         <button disabled={!valid}>Pay with TeleBirr</button>
       </Link>
     </div>

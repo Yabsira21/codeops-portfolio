@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
 import { getCartSummary } from "../util/cart";
 import { useNavigate } from "react-router-dom";
-import { useCart } from "../store/store";
+import { useCart } from "../store/cart";
 
-function Cart({ isLoggedIn }) {
+function Cart() {
   const navigate = useNavigate();
   const items = useCart((s) => s.items);
+  const removeItem = useCart((s) => s.remove);
   const { total } = getCartSummary(items);
 
   if (items.length == 0) {
@@ -21,6 +22,7 @@ function Cart({ isLoggedIn }) {
           <p>{cartItem.item.price} ETB</p>
           <p>Quantity: {cartItem.qty}</p>
           <p>Subtotal: {cartItem.item.price * cartItem.qty} ETB</p>
+          <button onClick={() => removeItem(cartItem.item.name)}>delete</button>
         </div>
       ))}
       <button onClick={() => navigate("/form")}>Checkout</button>
