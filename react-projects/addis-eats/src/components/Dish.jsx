@@ -36,6 +36,10 @@ function Dish({ id, name, price, spicy }) {
     }
   }
 
+  // if (name === "Buna") {
+  //   throw new Error("Testing Error Boundary");
+  // }
+
   return (
     <div className="dish">
       <Link to={`/menu/${id}`}>
