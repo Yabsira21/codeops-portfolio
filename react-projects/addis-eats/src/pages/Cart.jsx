@@ -1,19 +1,21 @@
 import { Link } from "react-router-dom";
 import { getCartSummary } from "../util/cart";
 import { useNavigate } from "react-router-dom";
+import { useCart } from "../store/store";
 
-function Cart({ cart, isLoggedIn }) {
+function Cart({ isLoggedIn }) {
   const navigate = useNavigate();
-  const { total } = getCartSummary(cart);
+  const items = useCart((s) => s.items);
+  const { total } = getCartSummary(items);
 
-  if (cart.length === 0) {
+  if (items.length == 0) {
     return <p>Your cart is empty.</p>;
   }
 
   return (
     <div className="cart">
       <p>Total: {total} ETB</p>
-      {cart.map((cartItem) => (
+      {items.map((cartItem) => (
         <div className="cart-item" key={cartItem.item.id}>
           <h3>{cartItem.item.name}</h3>
           <p>{cartItem.item.price} ETB</p>

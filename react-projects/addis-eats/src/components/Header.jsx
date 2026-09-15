@@ -2,10 +2,12 @@ import { FaShoppingCart } from "react-icons/fa";
 import { Link } from "react-router-dom";
 // import {getCartSummary}
 import { getCartSummary } from "../util/cart";
+import { useCart } from "../store/store";
 
-function Header({ name, cart }) {
+function Header({ name }) {
   const restaurantName = "Addis Café";
-  const { quantity } = getCartSummary(cart);
+  const items = useCart((s) => s.items);
+  const { quantity } = getCartSummary(items);
 
   return (
     <header>

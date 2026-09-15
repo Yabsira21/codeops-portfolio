@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from "react";
 
 import { useSearchParams } from "react-router-dom";
 
-function Menu({ searchTerm, setSearchTerm, setCart, cart }) {
+function Menu({ searchTerm, setSearchTerm }) {
   const [searchParams] = useSearchParams();
 
   const category = searchParams.get("category") || "All";
@@ -63,11 +63,10 @@ function Menu({ searchTerm, setSearchTerm, setCart, cart }) {
 
   return (
     <>
-      {/* <p className="total">{total} ETB</p> */}
       <form className="search-form" onSubmit={handleSubmit}>
         <input ref={searchRef} placeholder="search" />
       </form>
-      {/* <CategoryList setCategory={setCategory} /> */}
+
       <div className="menu">
         {shownWithSearch.map((d) => (
           <Dish
@@ -76,8 +75,8 @@ function Menu({ searchTerm, setSearchTerm, setCart, cart }) {
             name={d.name}
             price={d.price}
             spicy={d.spicy}
-            cart={cart}
-            setCart={setCart}
+            // cart={cart}
+            // setCart={setCart}
             // setTotal={setTotal}
             // total={total}
           />

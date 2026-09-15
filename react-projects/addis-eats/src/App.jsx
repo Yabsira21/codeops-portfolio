@@ -12,31 +12,21 @@ import Login from "./components/Login";
 import ThankYou from "./components/ThankYou";
 
 function App() {
-  // const [category, setCategory] = useState("All");
   const [name, setName] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
-  const [cart, setCart] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Layout name={name} cart={cart} />}>
+        <Route path="/" element={<Layout name={name} />}>
           <Route
             path="/"
             element={
-              <Home
-                searchTerm={searchTerm}
-                setSearchTerm={setSearchTerm}
-                setCart={setCart}
-                cart={cart}
-              />
+              <Home searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
             }
           />
-          <Route
-            path="/cart"
-            element={<Cart cart={cart} isLoggedIn={isLoggedIn} />}
-          />
+          <Route path="/cart" element={<Cart isLoggedIn={isLoggedIn} />} />
           <Route path="/thank-you" element={<ThankYou />} />
           <Route path="menu/:id" element={<DishPage />} />
           <Route

@@ -1,27 +1,38 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useCart } from "../store/store";
 
-function Dish({ id, name, price, spicy, cart, setCart }) {
+function Dish({ id, name, price, spicy }) {
+  const items = useCart((s) => s.items);
+  const addItem = useCart((s) => s.addItem);
+  const addQty = useCart((s) => s.addQty);
+
   function handleAdd() {
-    const existingItem = cart.find((cartItem) => cartItem.item.name === name);
+    // const existingItem = cart.find((cartItem) => cartItem.item.name === name);
+    const existingItem = items.find((cartItem) => cartItem.item.name === name);
 
     if (existingItem) {
-      setCart(
-        cart.map((cartItem) =>
-          cartItem.item.name === name
-            ? { ...cartItem, qty: cartItem.qty + 1 }
-            : cartItem,
-        ),
-      );
+      // setCart(
+      //   cart.map((cartItem) =>
+      //     cartItem.item.name === name
+      //       ? { ...cartItem, qty: cartItem.qty + 1 }
+      //       : cartItem,
+      //   ),
+      // );
+      addQty(name);
     } else {
-      setCart([
-        ...cart,
-        {
-          item: { name, price, spicy },
-          qty: 1,
-        },
-      ]);
+      // setCart([
+      //   ...cart,
+      //   {
+      //     item: { name, price, spicy },
+      //     qty: 1,
+      //   },
+      // ]);
+      addItem({
+        item: { name, price, spicy },
+        qty: 1,
+      });
     }
   }
 
@@ -36,7 +47,7 @@ function Dish({ id, name, price, spicy, cart, setCart }) {
       <button
         onClick={() => {
           handleAdd();
-          console.log(cart);
+          // console.log(cart);
           // setCount(count + 1);
           // setTotal(total + price);
         }}
