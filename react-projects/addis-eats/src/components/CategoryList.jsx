@@ -25,7 +25,7 @@ function CategoryList() {
   const categories = ["All", "Main", "Drink"];
 
   return (
-    <div>
+    <div className="categories-container">
       {categories.map((c) => (
         <button
           className={category == c ? "selected" : ""}
