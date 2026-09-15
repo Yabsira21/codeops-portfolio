@@ -236,6 +236,24 @@ button.selected {
   margin-top: 6rem;
 }
 
+.form-container form {
+  /* display: flex; */
+  /* flex-direction: column; */
+}
+
+.form-container form > div {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  margin-bottom: 1rem;
+  /* gap: ; */
+}
+
+.error-msg {
+  color: red;
+}
+
+/* #area-error  */
 .main-container {
   display: flex;
   /* align-items: center; */
