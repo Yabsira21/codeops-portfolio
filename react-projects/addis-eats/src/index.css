@@ -324,3 +324,15 @@ input {
 .modal button {
   cursor: pointer;
 }
+
+.skeleton-dish {
+  border: 1px solid #e9e8e2;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.mt-2 {
+  margin-top: 2.3rem;
+}

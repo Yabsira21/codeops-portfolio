@@ -1,5 +1,7 @@
 import Dish from "../components/Dish";
 import { useState, useEffect, useRef } from "react";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 import { useSearchParams } from "react-router-dom";
 
@@ -7,7 +9,6 @@ function Menu({ searchTerm, setSearchTerm }) {
   const [searchParams] = useSearchParams();
 
   const category = searchParams.get("category") || "All";
-  // const [total, setTotal] = useState(0);
   const [dishes, setDishes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -31,7 +32,8 @@ function Menu({ searchTerm, setSearchTerm }) {
         const res = await fetch("/src/data/data.json", {
           // signal: ctrl.signal,
         });
-        console.log("yes");
+
+        // console.log("yes");
         if (!res.ok) throw new Error("Could not load the menu");
         // console.log(await res.json());
         setDishes(await res.json());
@@ -42,6 +44,9 @@ function Menu({ searchTerm, setSearchTerm }) {
         setLoading(false);
       }
     }
+    // setTimeout(() => {
+    //   load();
+    // }, 3000);
     load();
     // return () => ctrl.abort();
   }, [category]);
@@ -57,9 +62,47 @@ function Menu({ searchTerm, setSearchTerm }) {
           d.name.toLowerCase().includes(searchTerm.toLowerCase()),
         );
 
-  if (loading) return <p>Loading the menu…</p>;
-  if (error) return <p className="err">{error}</p>;
-  if (dishes.length === 0) return <p>No dishes yet.</p>;
+  // if (loading) return <p>Loading the menu…</p>;
+  if (loading)
+    return (
+      <div className="menu mt-2">
+        {Array.from({ length: 6 }).map((_, i) => (
+          <div className="dish skeleton-dish" key={i}>
+            <Skeleton
+              width="60%"
+              height={22}
+              baseColor="#2e303a"
+              highlightColor="#3b3d48"
+            />
+
+            <Skeleton
+              width="45%"
+              height={18}
+              baseColor="#2e303a"
+              highlightColor="#3b3d48"
+            />
+
+            <div className="skeleton-buttons">
+              <Skeleton
+                width={40}
+                height={22}
+                baseColor="#2e303a"
+                highlightColor="#3b3d48"
+              />
+
+              <Skeleton
+                width={85}
+                height={22}
+                baseColor="#2e303a"
+                highlightColor="#3b3d48"
+              />
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  if (error) return <p className="err mt-2">Something went wrong!</p>;
+  if (dishes.length === 0) return <p className="mt-2">No dishes.</p>;
 
   return (
     <>
