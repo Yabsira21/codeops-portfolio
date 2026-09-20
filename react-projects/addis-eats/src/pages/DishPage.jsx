@@ -24,7 +24,6 @@ function DishPage() {
   return (
     <div>
       <h1>{dish.name}</h1>
-      {/* <p>ID: {dish.id}</p> */}
       <p>{dish.price} ETB</p>
     </div>
   );

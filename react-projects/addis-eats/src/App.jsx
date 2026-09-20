@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Home from "./components/Home";
 import Menu from "./components/Menu";
 import Layout from "./components/Layout";
@@ -22,8 +22,11 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
+          <Route index element={<Navigate to="/menu" replace />} />
+
           <Route
-            path="/"
+            index
+            path="/menu"
             element={
               <Home searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
             }
