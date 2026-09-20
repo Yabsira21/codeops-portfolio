@@ -5,7 +5,7 @@ import { useCart } from "../store/cart";
 import ErrorBoundary from "./ErrorBoundary";
 
 function Home({ searchTerm, setSearchTerm }) {
-  throw new Error("Intentional test error!");
+  // throw new Error("Intentional test error!");
   const [category, setCategory] = useState("All");
 
   return (
