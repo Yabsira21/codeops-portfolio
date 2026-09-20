@@ -5,6 +5,7 @@ import { useCart } from "../store/cart";
 import ErrorBoundary from "./ErrorBoundary";
 
 function Home({ searchTerm, setSearchTerm }) {
+  throw new Error("Intentional test error!");
   const [category, setCategory] = useState("All");
 
   return (
@@ -12,13 +13,12 @@ function Home({ searchTerm, setSearchTerm }) {
       <div className="main-container">
         <div>
           <CategoryList category={category} setCategory={setCategory} />
-          <ErrorBoundary>
-            <Menu
-              category={category}
-              searchTerm={searchTerm}
-              setSearchTerm={setSearchTerm}
-            />
-          </ErrorBoundary>
+
+          <Menu
+            category={category}
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+          />
         </div>
         {/* <Form /> */}
       </div>

@@ -47,6 +47,8 @@ function Form() {
 
   function handleChange(e) {
     const { name, value } = e.target;
+    console.log(name, value, "here");
+    console.log(form);
 
     setForm({
       ...form,

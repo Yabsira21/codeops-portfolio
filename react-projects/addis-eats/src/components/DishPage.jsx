@@ -25,6 +25,7 @@ function DishPage() {
     <div>
       <h1>{dish.name}</h1>
       <p>{dish.price} ETB</p>
+      <img src={dish.img} alt="" />
     </div>
   );
 }

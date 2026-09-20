@@ -11,6 +11,7 @@ import RequireAuth from "./components/RequireAuth";
 import Login from "./components/Login";
 import ThankYou from "./components/ThankYou";
 import { useAuth } from "./store/auth";
+import ErrorBoundary from "./components/ErrorBoundary";
 
 function App() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -28,7 +29,9 @@ function App() {
             index
             path="/menu"
             element={
-              <Home searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+              <ErrorBoundary>
+                <Home searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+              </ErrorBoundary>
             }
           />
           <Route path="/cart" element={<Cart />} />
