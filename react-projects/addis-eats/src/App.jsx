@@ -2,9 +2,9 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Home from "./components/Home";
 import Menu from "./components/Menu";
 import Layout from "./components/Layout";
-import { useState } from "react";
 import NotFound from "./components/NotFound";
-import Cart from "./components/Cart";
+// import Cart from "./components/Cart";
+import { lazy, Suspense, useState } from "react";
 import DishPage from "./components/DishPage";
 import Form from "./components/Form";
 import RequireAuth from "./components/RequireAuth";
@@ -18,6 +18,13 @@ function App() {
   // const [isLoggedIn, setIsLoggedIn] = useState(false);
   // const userName = useAuth((s) => s.name);
   const isLoggedin = useAuth((s) => s.isLoggedIn);
+  // const Cart = lazy(
+  //   () =>
+  //     new Promise((resolve) =>
+  //       setTimeout(() => resolve(import("./components/Cart")), 3000),
+  //     ),
+  // );
+  const Cart = lazy(() => import("./components/Cart"));
 
   return (
     <BrowserRouter>
@@ -34,7 +41,14 @@ function App() {
               </ErrorBoundary>
             }
           />
-          <Route path="/cart" element={<Cart />} />
+          <Route
+            path="/cart"
+            element={
+              <Suspense fallback={<p>Loading cart...</p>}>
+                <Cart />
+              </Suspense>
+            }
+          />
           <Route path="/thank-you" element={<ThankYou />} />
           <Route path="menu/:id" element={<DishPage />} />
           <Route
