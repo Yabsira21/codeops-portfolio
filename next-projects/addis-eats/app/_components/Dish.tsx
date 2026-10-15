@@ -1,13 +1,11 @@
-// import { useRef, useState } from "react";
+"use client";
 
 import Link from "next/link";
+import { useCallback, useRef, useState } from "react";
+import { useCart } from "../_store/cart";
+import DishModal from "./DishModal";
 
-// import { Link } from "react-router-dom";
-
-// import { useCart } from "../store/cart";
-// import DishModal from "./DishModal";
-
-function Dish({
+export default function Dish({
   id,
   name,
   price,
@@ -18,36 +16,27 @@ function Dish({
   price: number;
   spicy: boolean;
 }) {
-  //   const items = useCart((s: any) => s.items);
-  //   const addItem = useCart((s) => s.addItem);
-  //   const addQty = useCart((s) => s.addQty);
+  const items = useCart((s) => s.items);
+  const addItem = useCart((s) => s.addItem);
+  const addQty = useCart((s) => s.addQty);
 
-  //   const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const viewButtonRef = useRef<HTMLButtonElement>(null);
 
-  //   const viewButtonRef = useRef(null);
+  function handleAdd() {
+    const existingItem = items.find((cartItem) => cartItem.item.id === id);
 
-  //   function handleAdd() {
-  //     const existingItem = items.find((cartItem) => cartItem.item.name === name);
+    if (existingItem) {
+      addQty(id);
+    } else {
+      addItem({ item: { id, name, price, spicy }, qty: 1 });
+    }
+  }
 
-  //     if (existingItem) {
-  //       addQty(name);
-  //     } else {
-  //       addItem({
-  //         item: {
-  //           id,
-  //           name,
-  //           price,
-  //           spicy,
-  //         },
-  //         qty: 1,
-  //       });
-  //     }
-  //   }
-
-  //   function handleCloseModal() {
-  //     setShowModal(false);
-  //     viewButtonRef.current?.focus();
-  //   }
+  const handleCloseModal = useCallback(() => {
+    setShowModal(false);
+    viewButtonRef.current?.focus();
+  }, []);
 
   return (
     <div className="dish">
@@ -59,20 +48,18 @@ function Dish({
 
       <div className={spicy ? "spicy" : ""}>{spicy ? "Spicy" : ""}</div>
 
-      <button>Add</button>
+      <button onClick={handleAdd}>Add</button>
 
-      {/* <button ref={viewButtonRef} onClick={() => setShowModal(true)}>
+      <button ref={viewButtonRef} onClick={() => setShowModal(true)}>
         View details
-      </button> */}
+      </button>
 
-      {/* {showModal && (
+      {showModal && (
         <DishModal
           dish={{ id, name, price, spicy }}
           onClose={handleCloseModal}
         />
-      )} */}
+      )}
     </div>
   );
 }
-
-export default Dish;
